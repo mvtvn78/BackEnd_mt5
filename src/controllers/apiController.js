@@ -4,7 +4,7 @@ const {CheckValidEmail,CheckUserExist} = require("../services/LoginService")
 // TestApi Middleware
 const TestApi = async(req,res)=>{
         try {
-            const value =  await CMD.update("loaind",["TenQuyen","GiaTri"],["Test1",3],"MaLoai","LOAI4")
+            const value =  await CMD.select("quoctich")
             res.json(
                 ErrorServices('',0,value)
             )
