@@ -7,6 +7,7 @@ const initApiRoutes = require('./src/routes/api')
 const upload = require('./src/config/ConfigUpload')
 const initUpload = require('./src/routes/UploadRoute')
 //Testing
+const {mailOptions,sendMail} = require("./src/services/EmailService")
 //const  {hashTokenByValue,getValueByToken}= require("./src/services/JWTService")
 //Config
 config(app)
@@ -17,7 +18,6 @@ initUpload(app,upload)
 // //testing
 // let x = hashTokenByValue({"name ":"Mai Văn Tiền"})
 // console.log("Check >>",x);
-
 
 //OPEN PORT AND RUNNING
 app.listen(port, () => {

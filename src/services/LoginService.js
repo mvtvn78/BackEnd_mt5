@@ -54,7 +54,7 @@ const MakeUser = async(MaQT ,HoTen,GioiTinh,NgaySinh,Email,MatKhau) => {
         let tenND = Email.slice(0,Email.indexOf('@'))
         tenND= tenND.slice(0,8)
         let value = await CMD.insert("nguoidung",[MAND,"LOAI2",MaQT,HoTen,GioiTinh,NgaySinh,Email,"default.jpg",tenND,MatKhau,new Date(),new Date()]);
-        return value.length ? true : false
+        return value.affectedRows ? true : false
     }
     catch(err)
     {
@@ -86,4 +86,17 @@ const DeleteUserByCode = async(code) => {
         return false
     }
 }
-module.exports = {CheckValidEmail,CheckEmailExist,CheckUserExist,MakeUser,UpdateUserByCode,DeleteUserByCode}
+const getPassWordByEmail = async(email) => {
+    try {
+        let value = await CMD.selectOne("nguoidung",["Email"],[email]);
+        return value.length ? value : null
+    }
+    catch(err)
+    {
+        console.log("CheckEmailExist function has an error",err);
+        return null
+    }
+}
+module.exports = {CheckValidEmail,
+    CheckEmailExist,CheckUserExist,CheckUserExistByCode,
+    MakeUser,UpdateUserByCode,DeleteUserByCode,getPassWordByEmail}
