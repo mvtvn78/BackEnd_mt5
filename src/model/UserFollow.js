@@ -66,6 +66,21 @@ class UserFollow
             return null
         }
     }
+     //searchFollow
+     static async searchFollow(coditions)
+     {
+         try {
+             let value = await CMD.search("theodoi",["MAND","MANS"],coditions)
+             if(value.length !=0)
+                 return value
+             return null
+         }
+         catch(err)
+         {
+             console.log("searchFollow function has an error",err);
+             return null
+         }
+     }
     //#endregion
 }
 module.exports = UserFollow

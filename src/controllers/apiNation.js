@@ -54,4 +54,14 @@ const removeNation = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getNations,addNation,updateNation,removeNation}
+//searchNations  Middleware
+const searchNations = async(req,res)=>{
+    //get payload from body
+    const maQG = req.body.maQG
+    const tenQG = req.body.tenQG
+    let value = await Nation.searchUserTypes([getParamSearch(maQG),getParamSearch(tenQG)])
+    if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getNations,addNation,updateNation,removeNation,searchNations}

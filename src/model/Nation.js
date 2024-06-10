@@ -63,6 +63,21 @@ class Nation
             return null
         }
     }
+    //searchNations
+    static async searchNations(coditions)
+    {
+        try {
+            let value = await CMD.search("quoctich",["MaQT","TenQT"],coditions)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("searchNations function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = Nation

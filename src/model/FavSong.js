@@ -65,6 +65,21 @@ class FavSong
             return null
         }
     }
+     //searchFavSong
+     static async searchFavSongByND(maND)
+     {
+         try {
+             let value = await CMD.search("yeuthich",["MAND"],[maND])
+             if(value.length !=0)
+                 return value
+             return null
+         }
+         catch(err)
+         {
+             console.log("searchAlbum function has an error",err);
+             return null
+         }
+     }
     //#endregion
 }
 module.exports = FavSong

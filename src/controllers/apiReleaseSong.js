@@ -1,6 +1,6 @@
 const { ErrorServices } = require("../services/ErrorService");
 const Artist = require("../model/Artist");
-const ReleaseSong = require("../model/ReleaseALB");
+const ReleaseSong = require("../model/ReleaseSong");
 const Song = require("../model/Song");
 // getReleaseSong Middleware
 const getReleaseSong = async (req,res)=>{
@@ -72,4 +72,14 @@ const removeReleaseSong = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getReleaseSong,addReleaseSong,removeReleaseSong}
+// searchReleaseSong Middleware
+const searchReleaseSong = async(req,res)=>{
+    //get payload from body
+    const MANS = req.body.maNS
+    const maBH = req.body.maBH;
+    const value = await ReleaseSong.searchReleaseSong([getParamSearch(MANS),getParamSearch(maBH)])
+    if(value)
+        return res.json(ErrorServices("Retrive has succesful ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getReleaseSong,addReleaseSong,removeReleaseSong,searchReleaseSong}

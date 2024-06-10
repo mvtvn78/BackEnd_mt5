@@ -89,4 +89,20 @@ const removeFollow = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getFollowList,addFollow,removeFollow}
+// searchFollow 
+const searchFollow = async(req,res)=>{
+    //get payload from body
+    const maND = req.body.maND
+    const maNS = req.body.maNS
+    let value = await User.getUserBy(["MAND"],[maND])
+    if(!value)
+        return res.json(ErrorServices("User code not found",-1,''))
+    value = await Artist.getArtistBY(["MANS"],[maNS])
+    if(!value)
+        return res.json(ErrorServices("Artist code not found",-1,''))
+    value = await UserFollow.searchFollow([getParamSearch(maND),getParamSearch(maNS)]);
+    if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getFollowList,addFollow,removeFollow,searchFollow}

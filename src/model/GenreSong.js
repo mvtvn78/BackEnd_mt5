@@ -62,6 +62,22 @@ class GenreSong
             return null
         }
     }
+    //
+     //searchReleaseSong
+     static async searchGenreSong(coditions)
+     {
+         try {
+             let value = await CMD.search("theloai",["MATL","TenTL"],coditions)
+             if(value.length !=0)
+                 return value
+             return null
+         }
+         catch(err)
+         {
+             console.log("searchGenreSong function has an error",err);
+             return null
+         }
+     }
     //#endregion
 }
 module.exports = GenreSong

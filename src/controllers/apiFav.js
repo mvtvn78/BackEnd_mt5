@@ -73,4 +73,16 @@ const removeFavSong = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getFavSongs,addFavSong,removeFavSong}
+// 
+const searchFav = async(req,res)=>{
+    //get payload from body
+    const maND = req.body.maND
+    let value = await User.getUserBy(["MAND"],[maND])
+    if(!value)
+        return res.json(ErrorServices("User code not found",-1,''))
+    value = await FavSong.searchFavSongByND(getParamSearch(maND))
+    if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getFavSongs,addFavSong,removeFavSong,searchFav}

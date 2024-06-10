@@ -80,6 +80,21 @@ class ReleaseALB
             return null
         }
     }
+      //searchReleaseALB
+      static async searchReleaseALB(coditions)
+      {
+          try {
+              let value = await CMD.search("phathanh_alb",["MANS","MAALB"],coditions)
+              if(value.length !=0)
+                  return value
+              return null
+          }
+          catch(err)
+          {
+              console.log("searchReleaseALB function has an error",err);
+              return null
+          }
+      }
     //#endregion
 }
 module.exports = ReleaseALB

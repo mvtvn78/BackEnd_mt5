@@ -73,4 +73,14 @@ const removeReleaseALB = async(req,res)=>{
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
 
-module.exports = {getReleaseALBs,addReleaseALB,removeReleaseALB}
+// searchReleaseALBs Middleware
+const searchReleaseALBs = async(req,res)=>{
+    //get payload from body
+    const MANS = req.body.maNS
+    const MAALB = req.body.maALB
+    const value = await ReleaseALB.searchReleaseALB([getParamSearch(MANS),getParamSearch(MAALB)])
+    if(value)
+        return res.json(ErrorServices("Retrive has succesful ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getReleaseALBs,addReleaseALB,removeReleaseALB,searchReleaseALBs}

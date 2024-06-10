@@ -79,6 +79,21 @@ class ReleaseSong
             return null
         }
     }
+      //searchReleaseSong
+      static async searchReleaseSong(coditions)
+      {
+          try {
+              let value = await CMD.search("phathanh_bh",["MANS","MABH"],coditions)
+              if(value.length !=0)
+                  return value
+              return null
+          }
+          catch(err)
+          {
+              console.log("searchReleaseSong function has an error",err);
+              return null
+          }
+      }
     //#endregion
 }
 module.exports = ReleaseSong

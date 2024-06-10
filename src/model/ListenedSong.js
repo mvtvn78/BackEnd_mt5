@@ -53,6 +53,21 @@ class ListenedSong
             return null
         }
     }
+    //searchListenedSong
+    static async searchListenedSong(coditions)
+    {
+        try {
+            let value = await CMD.search("nghenhac",["MAND","MABH"],coditions)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("searchListenedSong function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = ListenedSong

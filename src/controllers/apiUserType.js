@@ -52,4 +52,15 @@ const removeUserType = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getUserTypes,addUserType,updateUserType,removeUserType}
+
+//searchUserTypes  Middleware
+const searchUserTypes = async(req,res)=>{
+    //get payload from body
+    const maLoai = req.body.maLoai
+    const tenLoai = req.body.tenLoai
+    let value = await UserType.searchUserTypes([getParamSearch(maLoai),getParamSearch(tenLoai)])
+    if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getUserTypes,addUserType,updateUserType,removeUserType,searchUserTypes}
