@@ -38,7 +38,7 @@ class GenreSong
     //Delete Method
     static async Delete(MATL) {
         try {
-            let value = await CMD.delete("theloai","MATL",[MATL]);
+            let value = await CMD.delete("theloai",["MATL"],[MATL]);
             return value.affectedRows ? true : false
         }
         catch(err)
