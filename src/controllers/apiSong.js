@@ -79,4 +79,13 @@ const removeSong = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getSongs,updateSong,removeSong,addSong}
+//Search BY MABH and TENBH
+const searchSong = async(req,res) => {
+    const maBH =  req.body.maBH;
+    const tenBH = req.body.tenBH;
+    const value = await Song.searchSong([getParamSearch(maBH),getParamSearch(tenBH)])
+    if(value)
+        return res.json(ErrorServices("Search successfully",0,value))
+    return res.json(ErrorServices("Search has failed",-1,''))
+}
+module.exports = {getSongs,updateSong,removeSong,addSong,searchSong}

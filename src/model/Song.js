@@ -87,6 +87,21 @@ class Song
             return null
         }
     }
+     //searchSong Method
+     static async searchSong(coditions)
+     {
+         try {
+             let value = await CMD.search("baihat",["MABH","TenBH"],coditions)
+             if(value.length !=0)
+                 return value
+             return null
+         }
+         catch(err)
+         {
+             console.log("searchSong function has an error",err);
+             return null
+         }
+     }
     //#endregion
 }
 module.exports = Song

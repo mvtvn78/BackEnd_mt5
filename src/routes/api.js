@@ -10,7 +10,7 @@ const { getArtists, addArtist, removeArtist, updateArtist,searchArtist } = requi
 const { addReleaseALB, getReleaseALBs } = require('../controllers/apiReleaseALB')
 const { getReleaseSong, addReleaseSong, removeReleaseSong } = require('../controllers/apiReleaseSong')
 const { updateAlbum, removeAlbum, addAlbum, getAlbums,searchAlbum } = require('../controllers/apiALb')
-const { getSongs, addSong, removeSong, updateSong } = require('../controllers/apiSong')
+const { getSongs, addSong, removeSong, updateSong,searchSong } = require('../controllers/apiSong')
 const { getGereSongs,addGenreSong,removeGenreSong,updateGenreSong } = require('../controllers/apiGenreSong')
 const initApiRoutes = (app) => {
     //Follow API
@@ -69,6 +69,7 @@ const initApiRoutes = (app) => {
     router.post("/song_add",addSong)
     router.delete("/song_remove",removeSong)
     router.put("/song_update",updateSong)
+    router.get("/song_search",searchSong)
 
     //Genre Song API
     router.get('/genre',getGereSongs)
