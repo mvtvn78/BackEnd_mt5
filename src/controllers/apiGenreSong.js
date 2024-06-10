@@ -38,7 +38,7 @@ const updateGenreSong = async(req,res)=>{
     //get payload from body
     const maTL = req.body.maTL;
     const tenTL = req.body.tenTL
-    const value = await GenreSong.Update(["TenTL"],[maTL])
+    const value = await GenreSong.Update(["TenTL"],[tenTL],maTL)
     if(value)
         return res.json(ErrorServices("Update  succesful ",0,''))
    return res.json(ErrorServices("Update has failed",-1,''))

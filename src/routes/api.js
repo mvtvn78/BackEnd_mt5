@@ -1,16 +1,17 @@
 const express = require('express')
 const router = express.Router()
 const {getNations, addNation, updateNation,removeNation} = require("../controllers/apiNation")
-const {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser} = require("../controllers/apiUser")
+const {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser,searchUsers} = require("../controllers/apiUser")
 const {getFollowList,addFollow,removeFollow} = require("../controllers/apiFollower")
 const { getFavSongs, addFavSong, removeFavSong } = require('../controllers/apiFav')
 const { getListendSong, addListendSong } = require('../controllers/apiListendSong')
 const { getUserTypes, addUserType, updateUserType, removeUserType } = require('../controllers/apiUserType')
-const { getArtists, addArtist, removeArtist, updateArtist } = require('../controllers/apiArtist')
+const { getArtists, addArtist, removeArtist, updateArtist,searchArtist } = require('../controllers/apiArtist')
 const { addReleaseALB, getReleaseALBs } = require('../controllers/apiReleaseALB')
 const { getReleaseSong, addReleaseSong, removeReleaseSong } = require('../controllers/apiReleaseSong')
-const { updateAlbum, removeAlbum, addAlbum, getAlbums } = require('../controllers/apiALb')
+const { updateAlbum, removeAlbum, addAlbum, getAlbums,searchAlbum } = require('../controllers/apiALb')
 const { getSongs, addSong, removeSong, updateSong } = require('../controllers/apiSong')
+const { getGereSongs,addGenreSong,removeGenreSong,updateGenreSong } = require('../controllers/apiGenreSong')
 const initApiRoutes = (app) => {
     //Follow API
     router.get("/followers",getFollowList)
@@ -28,8 +29,10 @@ const initApiRoutes = (app) => {
     router.post("/login",loginAPI)
     router.post("/forgot",forgotPass)
     router.get("/users",getUsers)
+    router.get("/user_search",searchUsers)
     router.put("/user_update",UpdateUser)
     router.delete("/user_remove",RemoveUser)
+
     //UserType API
     router.get("/usertypes",getUserTypes)
     router.post("/usertypes_add",addUserType)
@@ -45,6 +48,7 @@ const initApiRoutes = (app) => {
     router.post("/artists_add",addArtist)
     router.delete("/artists_remove",removeArtist)
     router.put("/artists_update",updateArtist)
+    router.get("/artists_search",searchArtist)
 
     //ReleaseALB API
     router.get("/release_album",getReleaseALBs)
@@ -59,7 +63,7 @@ const initApiRoutes = (app) => {
     router.post("/album_add",addAlbum)
     router.delete("/album_remove",removeAlbum)
     router.put("/album_update",updateAlbum)
-
+    router.get("/album_search",searchAlbum)
     //Song API
     router.get("/songs",getSongs)
     router.post("/song_add",addSong)
@@ -67,10 +71,10 @@ const initApiRoutes = (app) => {
     router.put("/song_update",updateSong)
 
     //Genre Song API
-    router.get('/genre',getUserTypes)
-    router.post("/genre_add",addUserType)
-    router.delete("/genre_remove",removeUserType)
-    router.put("/genre_update",updateUserType)
+    router.get('/genre',getGereSongs)
+    router.post("/genre_add",addGenreSong)
+    router.delete("/genre_remove",removeGenreSong)
+    router.put("/genre_update",updateGenreSong)
 
     //URL : domain + /api/v1
     return app.use("/api/v1",router)

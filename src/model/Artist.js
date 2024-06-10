@@ -85,18 +85,18 @@ class Artist
             return null
         }
     }
-    //searchArtistBY
-    static async searchArtistBY(fields,coditions)
+    //searchArtist
+    static async searchArtist(coditions)
     {
         try {
-            let value = await CMD.search("nghesi",fields,coditions)
+            let value = await CMD.search("nghesi",["MANS","TenNS"],coditions)
             if(value.length !=0)
                 return value
             return null
         }
         catch(err)
         {
-            console.log("getArtistBY function has an error",err);
+            console.log("searchArtist function has an error",err);
             return null
         }
     }

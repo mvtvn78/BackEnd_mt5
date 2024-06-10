@@ -44,7 +44,6 @@ const addAlbum = async(req,res)=>{
     const tenALB = req.body.tenALB;
     const moTa = req.body.moTa;
     const hinhanh = req.body.hinhanh;
-    const tinhTrang = req.body.tinhTrang
     const value = await Album.CreateNew(tenALB,moTa,hinhanh)
     if(value)
         return res.json(ErrorServices("Addition  succesful ",0,''))
@@ -72,4 +71,13 @@ const removeAlbum = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getAlbums,updateAlbum,removeAlbum,addAlbum}
+//Search BY MANS and TenNS
+const searchAlbum = async(req,res) => {
+    const maALB =  req.body.maALB;
+    const tenALB = req.body.tenALB;
+    const value = await Album.searchAlbum([getParamSearch(maALB),getParamSearch(tenALB)])
+    if(value)
+        return res.json(ErrorServices("Search successfully",0,value))
+    return res.json(ErrorServices("Search has failed",-1,''))
+}
+module.exports = {getAlbums,updateAlbum,removeAlbum,addAlbum,searchAlbum}

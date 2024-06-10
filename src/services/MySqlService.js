@@ -37,4 +37,7 @@ const getSearchParamPlaceholders = (arr) => {
   temp = temp.slice(0, -4);
   return temp
 }
-module.exports = {getInsertParamPlaceholders,getUpdateParamPlaceholders,getSearchParamPlaceholders,getSelectParamPlaceholders}
+const getParamSearch = (str) => {
+  return "%"+str + "%"
+}
+module.exports = {getParamSearch,getInsertParamPlaceholders,getUpdateParamPlaceholders,getSearchParamPlaceholders,getSelectParamPlaceholders}

@@ -41,7 +41,6 @@ const getSongs = async (req,res)=>{
 //addSong Middleware
 const addSong = async(req,res)=>{
     //get payload from body
-    const maBH = req.body.maBH;
     const maALB = req.body.maALB;
     const maTL = req.body.maTL;
     const tenBH = req.body.tenBH

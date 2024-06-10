@@ -1,5 +1,6 @@
 const { ErrorServices } = require("../services/ErrorService");
 const Artist = require("../model/Artist");
+const { getParamSearch } = require("../services/MySqlService");
 // getArtists Middleware
 const getArtists = async (req,res)=>{
     try {
@@ -18,21 +19,6 @@ const getArtists = async (req,res)=>{
             return res.json(
                 ErrorServices('Retrieve Artist information successfully',0,value)
             )
-        }
-        //query paramAZDFG 
-        const tenNS = req.query.tenNS;
-        if(tenNS)
-        {
-            const value = await Artist.getArtistBY(["TenNS"],[tenNS])
-            if(!value)
-            {
-                return res.json(
-                        ErrorServices('An error occurred',-1,'')
-                )
-            }
-                return res.json(
-                    ErrorServices('Retrieve Artist information successfully',0,value)
-                )
         }
         //
         const value = await Artist.getArtistList()
@@ -65,7 +51,7 @@ const addArtist = async(req,res)=>{
     const mota = req.body.mota
     const value = await Artist.CreateNew(maQT,tennS,anh,gt,ngaysinh,mota)
     if(value)
-        return res.json(ErrorServices("Addition  succesful ",0,''))
+        return res.json(ErrorServices("Addition  succesfully ",0,''))
    return res.json(ErrorServices("Addition has failed",-1,''))
 }
 //updateArtist Middleware
@@ -87,9 +73,18 @@ const updateArtist = async(req,res)=>{
 const removeArtist = async(req,res)=>{
      //get payload from body
      const maNS = req.body.maNS
-     let value = await UserType.Delete(maNS)
+     let value = await Artist.Delete(maNS)
      if(value)
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {getArtists,addArtist,updateArtist,removeArtist}
+//Search BY MANS and TenNS
+const searchArtist = async(req,res) => {
+    const maNS =  req.body.maNS;
+    const tenNS = req.body.tenNS;
+    const value = await Artist.searchArtist([getParamSearch(maNS),getParamSearch(tenNS)])
+    if(value)
+        return res.json(ErrorServices("Search successfully",0,value))
+    return res.json(ErrorServices("Search has failed",-1,''))
+}
+module.exports = {getArtists,addArtist,updateArtist,removeArtist,searchArtist}

@@ -19,8 +19,8 @@ class Album
     static async CreateNew(TenALB,MoTa,HinhAnh) {
         try {
             const MAALB = makeUniqueCode("ALB",200)
-            let value = await CMD.insert("album",[MAALB,TenALB,MoTa,HinhAnh]);
-            return value.length ? true : false
+            let value = await CMD.insert("album",[MAALB,TenALB,MoTa,HinhAnh,1]);
+            return value.affectedRows ? true : false
         }
         catch(err)
         {
@@ -82,6 +82,22 @@ class Album
              return null
          }
      }
+     //searchAlbum
+    static async searchAlbum(coditions)
+    {
+        try {
+            let value = await CMD.search("album",["MAALB","TenALB"],coditions)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("searchAlbum function has an error",err);
+            return null
+        }
+    }
+    
     //#endregion
 }
 module.exports = Album

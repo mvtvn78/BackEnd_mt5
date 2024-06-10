@@ -4,6 +4,7 @@ const {CheckValidEmail,CheckUserExist,
 const {sendMailCreateSuccess,sendPassByEmail} = require("../services/EmailService")
 const { hashTokenByValue,getValueByToken } = require("../services/JWTService")
 const User = require("../model/User")
+const { getParamSearch } = require("../services/MySqlService")
 // registerAPI Middleware
 const registerAPI = async(req,res)=>{
     //get payload from body
@@ -164,4 +165,13 @@ const RemoveUser = async(req,res)=>{
         return res.json(ErrorServices("Delete successfully",0,''))
    return res.json(ErrorServices("Deletion has failed",-1,''))
 }
-module.exports = {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser}
+//Search By MAND OR TENND
+const searchUsers = async(req,res) => {
+    const maND =  req.body.maND;
+    const tenND = req.body.tenND;
+    const value = await User.searchUser([getParamSearch(maND),getParamSearch(tenND)])
+    if(value)
+        return res.json(ErrorServices("Search successfully",0,value))
+    return res.json(ErrorServices("Search has failed",-1,''))
+}
+module.exports = {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser,searchUsers}

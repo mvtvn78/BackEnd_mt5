@@ -100,6 +100,22 @@ class User
             return null
         }
     }
+    //
+    //searchUser
+    static async searchUser(coditions)
+    {
+        try {
+            let value = await CMD.search("nguoidung",["MAND","TenND"],coditions)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("searchUser function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = User

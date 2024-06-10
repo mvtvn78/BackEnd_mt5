@@ -45,7 +45,7 @@ const addReleaseALB = async(req,res)=>{
     //get payload from body
     const maNS = req.body.maNS;
     const maALB = req.body.maALB;
-    let value = await Artist.getArtistBY(maNS)
+    let value = await Artist.getArtistBY(["MANS"],[maNS])
      if(!value)
          return res.json(ErrorServices("Artist code not found",-1,''))
      value = await Album.getAlbumBy(maALB)
@@ -61,7 +61,7 @@ const removeReleaseALB = async(req,res)=>{
      //get payload from body
      const maNS = req.body.maNS;
     const maALB = req.body.maALB;
-    let value = await Artist.getArtistBY(maNS)
+    let value = await Artist.getArtistBY(["MANS"],[maNS])
     if(!value)
         return res.json(ErrorServices("Artist code not found",-1,''))
     value = await Album.getAlbumBy(maALB)
@@ -72,4 +72,5 @@ const removeReleaseALB = async(req,res)=>{
          return res.json(ErrorServices("Delete successfully ",0,''))
     return res.json(ErrorServices("Deletion has failed",-1,''))
 }
+
 module.exports = {getReleaseALBs,addReleaseALB,removeReleaseALB}
