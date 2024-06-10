@@ -28,4 +28,13 @@ const getSelectParamPlaceholders = (arr) => {
     temp = temp.slice(0,-4);
     return temp
 }
-module.exports = {getInsertParamPlaceholders,getUpdateParamPlaceholders,getSelectParamPlaceholders}
+const getSearchParamPlaceholders = (arr) => {
+  let temp = ''
+  for (let i = 0; i < arr.length; ++i) {
+    temp += `( ${arr[i]} LIKE ? ) OR `
+  }
+  // ignore 3 elements last 
+  temp = temp.slice(0, -4);
+  return temp
+}
+module.exports = {getInsertParamPlaceholders,getUpdateParamPlaceholders,getSearchParamPlaceholders,getSelectParamPlaceholders}

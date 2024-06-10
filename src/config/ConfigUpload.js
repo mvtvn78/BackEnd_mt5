@@ -1,4 +1,5 @@
-const multer  = require('multer')
+const multer  = require('multer');
+const { CutFile } = require('../services/UpLoadService');
 require('dotenv').config() 
 //Disk storage engine 
 const storage = multer.diskStorage({
@@ -7,7 +8,8 @@ const storage = multer.diskStorage({
     },
     filename: function(req, file, cb) {
       const uniqueSuffix = Date.now()  + Math.round(Math.random() * 1E9)
-      cb(null,uniqueSuffix+"_"+ file.originalname);
+      let cutfile = CutFile(file.originalname)
+      cb(null,uniqueSuffix+"_"+ cutfile);
     },
   });
 //Init Multer
