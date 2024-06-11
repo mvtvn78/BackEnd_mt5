@@ -65,7 +65,8 @@ const updateSong = async(req,res)=>{
     const anh = req.body.anh
     const luotxem = req.body.luotxem
     const loibathat = req.body.loibathat
-    const value = await Song.Update(["MAALB","MATL","TenBH","TinhTrang","NoiDung","Anh","LuotXem","LoiBatHat"],[maALB,maTL,tenBH,tinhTrang,noiDung,anh,luotxem,loibathat],maBH)
+    const filenhac = req.body.filenhac
+    const value = await Song.Update(["MAALB","MATL","TenBH","TinhTrang","NoiDung","Anh","LuotXem","LoiBatHat","filenhac"],[maALB,maTL,tenBH,tinhTrang,noiDung,anh,luotxem,loibathat,filenhac],maBH)
     if(value)
         return res.json(ErrorServices("Update  succesful ",0,''))
    return res.json(ErrorServices("Update has failed",-1,''))

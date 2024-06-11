@@ -131,7 +131,6 @@ const UpdateUser = async(req,res)=>{
      const email = req.body.email
      const pass = req.body.pass
      const anh = req.body.Anh
-     const tenND = req.body.tenND
      //Check User Exsist
      if(!await User.getUserBy(["MAND"],[maND]))
      {
@@ -148,7 +147,7 @@ const UpdateUser = async(req,res)=>{
          //Assign email to empty string
          if (!await User.Update(["Email"],[""],maND))
              return res.json(ErrorServices("Update User has failed",-1,''))
-        const value = await User.Update(["TenND","MaLoai","MaQT","HoTen","GioiTinh","NgaySinh","Email","Anh","MatKhau"],[tenND,maLOAI,maQT,hoTen,gioiTinh,ngaySinh,email,anh,pass],maND);
+        const value = await User.Update(["MaLoai","MaQT","HoTen","GioiTinh","NgaySinh","Email","Anh","MatKhau"],[maLOAI,maQT,hoTen,gioiTinh,ngaySinh,email,anh,pass],maND);
         if(value)
             return res.json(ErrorServices("Updated successfully",0,''))
         return res.json(ErrorServices("Update has failed",-1,''))
