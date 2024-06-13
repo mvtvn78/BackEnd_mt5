@@ -83,8 +83,8 @@ const removeSong = async(req,res)=>{
 }
 //Search BY MABH and TENBH
 const searchSong = async(req,res) => {
-    const maBH =  req.body.maBH;
-    const tenBH = req.body.tenBH;
+    const maBH =  req.query.maBH;
+    const tenBH = req.query.tenBH;
     const value = await Song.searchSong([getParamSearch(maBH),getParamSearch(tenBH)])
     if(value)
         return res.json(ErrorServices("Search successfully",0,value))

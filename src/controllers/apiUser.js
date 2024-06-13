@@ -169,8 +169,8 @@ const RemoveUser = async(req,res)=>{
 }
 //Search By MAND OR TENND
 const searchUsers = async(req,res) => {
-    const maND =  req.body.maND;
-    const tenND = req.body.tenND;
+    const maND =  req.query.maND;
+    const tenND = req.query.tenND;
     const value = await User.searchUser([getParamSearch(maND),getParamSearch(tenND)])
     if(value)
         return res.json(ErrorServices("Search successfully",0,value))

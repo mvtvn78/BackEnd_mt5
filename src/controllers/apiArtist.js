@@ -80,8 +80,8 @@ const removeArtist = async(req,res)=>{
 }
 //Search BY MANS and TenNS
 const searchArtist = async(req,res) => {
-    const maNS =  req.body.maNS;
-    const tenNS = req.body.tenNS;
+    const maNS =  req.query.maNS;
+    const tenNS = req.query.tenNS;
     const value = await Artist.searchArtist([getParamSearch(maNS),getParamSearch(tenNS)])
     if(value)
         return res.json(ErrorServices("Search successfully",0,value))

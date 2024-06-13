@@ -76,7 +76,7 @@ const removeFavSong = async(req,res)=>{
 // 
 const searchFav = async(req,res)=>{
     //get payload from body
-    const maND = req.body.maND
+    const maND = req.query.maND
     let value = await User.getUserBy(["MAND"],[maND])
     if(!value)
         return res.json(ErrorServices("User code not found",-1,''))

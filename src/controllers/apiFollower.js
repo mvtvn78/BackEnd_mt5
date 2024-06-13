@@ -92,8 +92,8 @@ const removeFollow = async(req,res)=>{
 // searchFollow 
 const searchFollow = async(req,res)=>{
     //get payload from body
-    const maND = req.body.maND
-    const maNS = req.body.maNS
+    const maND = req.query.maND
+    const maNS = req.query.maNS
     let value = await User.getUserBy(["MAND"],[maND])
     if(!value)
         return res.json(ErrorServices("User code not found",-1,''))

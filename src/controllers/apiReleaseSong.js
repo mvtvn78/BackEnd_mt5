@@ -75,8 +75,8 @@ const removeReleaseSong = async(req,res)=>{
 // searchReleaseSong Middleware
 const searchReleaseSong = async(req,res)=>{
     //get payload from body
-    const MANS = req.body.maNS
-    const maBH = req.body.maBH;
+    const MANS = req.query.maNS
+    const maBH = req.query.maBH;
     const value = await ReleaseSong.searchReleaseSong([getParamSearch(MANS),getParamSearch(maBH)])
     if(value)
         return res.json(ErrorServices("Retrive has succesful ",0,value))

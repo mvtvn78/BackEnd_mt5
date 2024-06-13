@@ -76,8 +76,8 @@ const removeReleaseALB = async(req,res)=>{
 // searchReleaseALBs Middleware
 const searchReleaseALBs = async(req,res)=>{
     //get payload from body
-    const MANS = req.body.maNS
-    const MAALB = req.body.maALB
+    const MANS = req.query.maNS
+    const MAALB = req.query.maALB
     const value = await ReleaseALB.searchReleaseALB([getParamSearch(MANS),getParamSearch(MAALB)])
     if(value)
         return res.json(ErrorServices("Retrive has succesful ",0,value))

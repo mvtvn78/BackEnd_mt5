@@ -56,8 +56,8 @@ const removeUserType = async(req,res)=>{
 //searchUserTypes  Middleware
 const searchUserTypes = async(req,res)=>{
     //get payload from body
-    const maLoai = req.body.maLoai
-    const tenLoai = req.body.tenLoai
+    const maLoai = req.query.maLoai
+    const tenLoai = req.query.tenLoai
     let value = await UserType.searchUserTypes([getParamSearch(maLoai),getParamSearch(tenLoai)])
     if(value)
         return res.json(ErrorServices("Retrive successfully ",0,value))

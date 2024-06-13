@@ -56,8 +56,8 @@ const removeGenreSong = async(req,res)=>{
 // searchGenre Middleware
 const searchGenre = async(req,res)=>{
     //get payload from body
-    const MATL = req.body.maTL;
-    const TenTL = req.body.tenTL;
+    const MATL = req.query.maTL;
+    const TenTL = req.query.tenTL;
     const value = await GenreSong.searchGenreSong([getParamSearch(MATL),getParamSearch(TenTL)])
     if(value)
         return res.json(ErrorServices("Retrive has succesful ",0,value))

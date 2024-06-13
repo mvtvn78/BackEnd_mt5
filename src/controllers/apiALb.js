@@ -73,8 +73,8 @@ const removeAlbum = async(req,res)=>{
 }
 //Search BY MANS and TenNS
 const searchAlbum = async(req,res) => {
-    const maALB =  req.body.maALB;
-    const tenALB = req.body.tenALB;
+    const maALB =  req.query.maALB;
+    const tenALB = req.query.tenALB;
     const value = await Album.searchAlbum([getParamSearch(maALB),getParamSearch(tenALB)])
     if(value)
         return res.json(ErrorServices("Search successfully",0,value))
