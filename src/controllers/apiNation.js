@@ -58,8 +58,8 @@ const removeNation = async(req,res)=>{
 //searchNations  Middleware
 const searchNations = async(req,res)=>{
     //get payload from body
-    const maQG = req.body.maQG
-    const tenQG = req.body.tenQG
+    const maQG = req.query.maQG
+    const tenQG = req.query.tenQG
     let value = await Nation.searchNations([getParamSearch(maQG),getParamSearch(tenQG)])
     if(value)
         return res.json(ErrorServices("Retrive successfully ",0,value))
