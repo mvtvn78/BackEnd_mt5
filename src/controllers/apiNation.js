@@ -40,7 +40,7 @@ const updateNation = async(req,res)=>{
     const maQT = req.body.maQT;
     const tenQT = req.body.tenQT
     const anh = req.body.anh
-    const value = await UserType.Update(["TenQT","Anh"],[tenQT,anh],maQT)
+    const value = await Nation.Update(["TenQT","Anh"],[tenQT,anh],maQT)
     if(value)
         return res.json(ErrorServices("Update  succesful ",0,''))
    return res.json(ErrorServices("Update has failed",-1,''))
