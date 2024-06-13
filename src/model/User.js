@@ -106,7 +106,7 @@ class User
     static async searchUser(coditions)
     {
         try {
-            let value = await CMD.search("nguoidung",["MAND","TenND"],coditions)
+            let value = await CMD.search("nguoidung",["MAND","HoTen"],coditions)
             if(value.length !=0)
                 return value
             return null
