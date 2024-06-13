@@ -144,8 +144,10 @@ const UpdateUser = async(req,res)=>{
      {
          return res.json(ErrorServices("Invalid Email",-1,''))
      }
+     const user = await CheckUserByEmail(email)
+     console.log(user);
      //Check Exist Email
-     if(!await CheckEmailExist(email) || await CheckUserByEmail(email)?.MAND == maND)
+     if(!await CheckEmailExist(email) || await user?.MAND == maND)
      {
         const value = await User.Update(["MaLoai","MaQT","HoTen","GioiTinh","NgaySinh","Email","Anh","MatKhau"],[maLOAI,maQT,hoTen,gioiTinh,ngaySinh,email,anh,pass],maND);
         if(value)
