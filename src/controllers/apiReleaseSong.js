@@ -46,7 +46,7 @@ const addReleaseSong = async(req,res)=>{
     //get payload from body
     const maNS = req.body.maNS;
     const maBH = req.body.maBH;
-    let value = await Artist.getArtistBY(maNS)
+    let value = await Artist.getArtistBY("MANS",maNS)
      if(!value)
          return res.json(ErrorServices("Artist code not found",-1,''))
      value = await Song.getSongBy(["MABH"],[maBH])
