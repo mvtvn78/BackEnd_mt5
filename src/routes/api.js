@@ -26,7 +26,7 @@ const initApiRoutes = (app) => {
     //Listened API
     router.get("/listened_list",getListendSong)
     router.post("/listened_list_add",addListendSong)
-    router.post("/listened_list_search",searchListendSong)
+    router.get("/listened_list_search",searchListendSong)
     router.put("/listened_list_time",ChangeTimeListendSong)
     router.get("/listened_list_code",getDeatilsListendListByCode)
     //User API
