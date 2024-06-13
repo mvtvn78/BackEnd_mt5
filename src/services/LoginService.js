@@ -45,7 +45,7 @@ const CheckUserExistByCode = async(code) => {
     }
 }
 
-const getPassWordByEmail = async(email) => {
+const CheckUserByEmail = async(email) => {
     try {
         let value = await CMD.selectOne("nguoidung",["Email"],[email]);
         return value.length ? value : null
@@ -57,4 +57,4 @@ const getPassWordByEmail = async(email) => {
     }
 }
 module.exports = {CheckValidEmail,
-    CheckEmailExist,CheckUserExist,CheckUserExistByCode,getPassWordByEmail}
+    CheckEmailExist,CheckUserExist,CheckUserExistByCode,CheckUserByEmail}

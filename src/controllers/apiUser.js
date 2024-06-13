@@ -1,6 +1,6 @@
 const {ErrorServices} = require("../services/ErrorService")
 const {CheckValidEmail,CheckUserExist,
-    CheckEmailExist,getPassWordByEmail} = require("../services/LoginService")
+    CheckEmailExist,CheckUserByEmail} = require("../services/LoginService")
 const {sendMailCreateSuccess,sendPassByEmail} = require("../services/EmailService")
 const { hashTokenByValue,getValueByToken } = require("../services/JWTService")
 const User = require("../model/User")
@@ -66,7 +66,7 @@ const forgotPass = async(req,res) => {
     const checkstage1 = await CheckEmailExist(email)
     if(checkstage1)
     {
-        const value = await getPassWordByEmail(email);
+        const value = await CheckUserByEmail(email);
         if(value)
         {
             sendPassByEmail(email,value[0].MatKhau)
@@ -145,11 +145,8 @@ const UpdateUser = async(req,res)=>{
          return res.json(ErrorServices("Invalid Email",-1,''))
      }
      //Check Exist Email
-     if(!await CheckEmailExist(email))
+     if(!await CheckEmailExist(email) || await CheckUserByEmail(email).data.MAND == maND)
      {
-         //Assign email to empty string
-         if (!await User.Update(["Email"],[""],maND))
-             return res.json(ErrorServices("Update User has failed",-1,''))
         const value = await User.Update(["MaLoai","MaQT","HoTen","GioiTinh","NgaySinh","Email","Anh","MatKhau"],[maLOAI,maQT,hoTen,gioiTinh,ngaySinh,email,anh,pass],maND);
         if(value)
             return res.json(ErrorServices("Updated successfully",0,''))
