@@ -22,7 +22,7 @@ const getReleaseSong = async (req,res)=>{
                 ErrorServices('Retrieve Release Song information successfully',0,value)
             )
         }
-        const value = await ReleaseSong.getReleaseALBList()
+        const value = await ReleaseSong.getReleaseSongList()
         if(!value)
         {
             return res.json(
