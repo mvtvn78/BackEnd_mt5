@@ -77,7 +77,6 @@ const searchListendSong = async(req,res)=>{
     //get payload from body
     const maND = req.query.maND
     const maBH = req.query.maBH
-  
     const value = await ListenedSong.searchListenedSong([getParamSearch(maND),getParamSearch(maBH)])
     if(value)
         return res.json(ErrorServices("Retrive has succesful ",0,value))
