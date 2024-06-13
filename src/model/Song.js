@@ -102,6 +102,34 @@ class Song
              return null
          }
      }
+     //
+     static async searchDetailSongs(tenBH)
+     {
+        try {
+            let value = await CMD.excutebysql(`SELECT baihat.MABH ,baihat.Anh as "AnhBH",baihat.NoiDung ,baihat.TenBH,baihat.LoiBatHat,baihat.filenhac,nghesi.Anh as "AnhNS",nghesi.TenNS,nghesi.MANS FROM baihat INNER JOIN phathanh_bh ON baihat.MABH = phathanh_bh.MABH INNER JOIN nghesi ON nghesi.MANS = phathanh_bh.MANS WHERE baihat.TenBH LIKE '%${tenBH}%'`)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("searchDetailSongs function has an error",err);
+            return null
+        }
+     }
+     //
+     static async IncreaseView(maBH)
+     {
+        try {
+            let value = await CMD.excutebysql(`update baihat SET LuotXem = LuotXem +1 WHERE MABH = '${maBH}'`)
+            return value.affectedRows ? true : false
+        }
+        catch(err)
+        {
+            console.log("IncreaseView function has an error",err);
+            return null
+        }
+     }
     //#endregion
 }
 module.exports = Song

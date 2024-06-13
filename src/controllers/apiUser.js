@@ -17,13 +17,13 @@ const registerAPI = async(req,res)=>{
     //Check Valid Email
     if(!await CheckValidEmail(email))
     {
-        res.json(ErrorServices("Invalid Email",-1,''))
+        res.json(ErrorServices("Invalid Email",-2,''))
         return;
     }
     //Check Exist Email
     if(await CheckEmailExist(email))
     {
-        res.json(ErrorServices("Email Already Exists",-1,''))
+        res.json(ErrorServices("Email Already Exists",-3,''))
         return;
     }
     const checkstage1 = await User.CreateNew(maQT,hoTen,gioiTinh,ngaySinh,email,pass)
@@ -42,7 +42,7 @@ const loginAPI = async (req,res) => {
     //Check Valid Email
     if(! await CheckValidEmail(email))
     {
-        res.json(ErrorServices("Invalid Email",-1,''))
+        res.json(ErrorServices("Invalid Email",-2,''))
         return;
     }
     const pass = req.body.pass
@@ -77,17 +77,20 @@ const forgotPass = async(req,res) => {
         }
     }
     else {
-        res.json(ErrorServices("Invalid Email",-1,''))
+        res.json(ErrorServices("Invalid Email",-2,''))
     }
 }
 //getUsers Middleware
 const getUsers = async(req,res)=>{
     try {
         //query param
-        const ID = req.query.id;
+        const Token = req.query.token;
         // can get
-        if(ID)
+        if(Token)
         {
+            // get id by token
+            const ID = getValueByToken(Token).MAND
+            console.log(ID);
             const value = await User.getUserBy(["MAND"],[ID]);
             if(!value)
             {

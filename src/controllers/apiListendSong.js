@@ -6,11 +6,12 @@ const Song = require("../model/Song");
 const getListendSong = async (req,res)=>{
     try {
         //query param
-        const ID = req.query.id;
+        const user = req.query.user;
+        const bh= req.query.bh
         // can get
-        if(ID)
+        if(user &&bh)
         {
-            const value = await ListenedSong.getListenedSongListBy(["MAND"],[ID])
+            const value = await ListenedSong.getListenedSongListBy(["MAND","MABH"],[user,bh])
             if(!value)
             {
                 return res.json(
@@ -21,6 +22,19 @@ const getListendSong = async (req,res)=>{
                 ErrorServices('Retrieve ListendSong information successfully',0,value)
             )
         }
+        if(user)
+            {
+                const value = await ListenedSong.getListenedSongListBy(["MAND"],[user])
+                if(!value)
+                {
+                    return res.json(
+                        ErrorServices('An error occurred',-1,'')
+                    )
+                }
+                return res.json(
+                    ErrorServices('Retrieve ListendSong information successfully',0,value)
+                )
+            }
         //
         const value = await ListenedSong.getListenedSongList()
         if(!value)
@@ -73,4 +87,33 @@ const searchListendSong = async(req,res)=>{
         return res.json(ErrorServices("Retrive has succesful ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports ={getListendSong,addListendSong,searchListendSong}
+//
+const ChangeTimeListendSong = async(req,res)=>
+{
+    //get payload from body
+    const maND = req.body.maND
+    const maBH = req.body.maBH
+    let value = await User.getUserBy(["MAND"],[maND])
+    if(!value)
+        return res.json(ErrorServices("User code not found",-1,''))
+    value = await Song.getSongBy(["MABH"],[maBH])
+    if(!value)
+        return res.json(ErrorServices("Song code not found",-1,''))
+    value = await ListenedSong.ChangeTime(maBH,maND)
+    if(value)
+        return res.json(ErrorServices("Change successfully ",0,''))
+   return res.json(ErrorServices("Change has failed",-1,''))
+}
+// 
+const getDeatilsListendListByCode = async(req,res)=>{
+     //get payload from body
+     const maND = req.query.maND
+     if(maND)
+     {
+        const value = await ListenedSong.getListendSongDetailByUserCode(maND);
+        if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+     }
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports ={getListendSong,addListendSong,searchListendSong,ChangeTimeListendSong,getDeatilsListendListByCode}

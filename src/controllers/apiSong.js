@@ -1,5 +1,6 @@
 const Song = require("../model/Song");
 const { ErrorServices } = require("../services/ErrorService");
+const { getParamSearch } = require("../services/MySqlService");
 // getSongs Middleware
 const getSongs = async (req,res)=>{
     try {
@@ -89,4 +90,27 @@ const searchSong = async(req,res) => {
         return res.json(ErrorServices("Search successfully",0,value))
     return res.json(ErrorServices("Search has failed",-1,''))
 }
-module.exports = {getSongs,updateSong,removeSong,addSong,searchSong}
+// getDetailListSongs  Middleware
+const getDetailListSongs= async (req,res)=>{
+    const tenBH = req.query.tenBH;
+    const value = await Song.searchDetailSongs(tenBH)
+    if(value)
+        return res.json(ErrorServices("Retrive successfully",0,value))
+    return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+// searchDetails Middleware 
+const searchDetails= async (req,res)=>{
+    const value = await Song.getDetailSongs()
+    if(value)
+        return res.json(ErrorServices("Retrive successfully",0,value))
+    return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+//
+const IncreaseViewSong = async(req,res) =>{
+    const maBH = req.body.maBH;
+    const value = await Song.IncreaseView(maBH)
+    if(value)
+        return res.json(ErrorServices("Inscrease successfully",0,''))
+    return res.json(ErrorServices("Inscrease has failed",-1,''))
+}
+module.exports = {getSongs,updateSong,removeSong,addSong,searchSong,getDetailListSongs,IncreaseViewSong}

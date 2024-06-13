@@ -27,13 +27,14 @@ class User
     //CreateNew Method
     static async CreateNew(MaQT ,HoTen,GioiTinh,NgaySinh,Email,MatKhau) {
         try {
+            console.log(MaQT,HoTen,GioiTinh,NgaySinh,Email,MatKhau);
             //intial MAND
             const MAND = makeUniqueCode("ND",100);
             // intial tenND based on email
             let tenND = Email.slice(0,Email.indexOf('@'))
             tenND= tenND.slice(0,8)
             // upload image
-            let value = await CMD.insert("nguoidung",[MAND,"LOAI2",MaQT,HoTen,GioiTinh,NgaySinh,Email,"default.jpg",tenND,MatKhau,new Date(),new Date()]);
+            let value = await CMD.insert("nguoidung",[MAND,"LOAI2",MaQT,HoTen,GioiTinh,NgaySinh,Email,"default.jpg",MatKhau,new Date(),new Date()]);
             return value.affectedRows ? true : false
         }
         catch(err)

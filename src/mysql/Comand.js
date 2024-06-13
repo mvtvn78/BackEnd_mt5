@@ -6,6 +6,15 @@ const {
   getSearchParamPlaceholders
 } = require("../services/MySqlService");
 class CMD {
+  //excutebysql by sql
+  static excutebysql(sql) {
+    return new Promise((resolve, reject) => {
+      cmdMysql.execute(sql, (err, rows) => {
+        if (err instanceof Error) reject(err);
+        resolve(rows);
+      });
+    });
+  }
   //select one
   static selectOne(table, fields, conditions) {
     const paramFields = getSelectParamPlaceholders(fields)
@@ -25,6 +34,7 @@ class CMD {
     const paramFileds  = getSearchParamPlaceholders(fields)
     const sql =`SELECT * FROM ${table} WHERE ${paramFileds}`
     console.log("Search >>",sql);
+    console.log("Condtions >>",condtions);
     return new Promise( (resolve,reject) => {
         cmdMysql.execute(sql,condtions,(err, rows) => {
           if (err instanceof Error) reject(err);
@@ -80,5 +90,6 @@ class CMD {
         });
     });
   }
+
 }
 module.exports = CMD;
