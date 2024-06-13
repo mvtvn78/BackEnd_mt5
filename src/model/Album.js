@@ -71,7 +71,7 @@ class Album
      static async getAlbumBy(code)
      {
          try {
-             let value = await CMD.selectOne("album",["MALB"],[code]);
+             let value = await CMD.selectOne("album",["MAALB"],[code]);
              if(value.length !=0)
                  return value
              return null
