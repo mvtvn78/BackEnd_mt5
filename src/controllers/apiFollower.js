@@ -2,6 +2,7 @@ const {ErrorServices} = require("../services/ErrorService")
 const UserFollow = require("../model/UserFollow");
 const User = require("../model/User");
 const Artist = require("../model/Artist");
+const { getParamSearch } = require("../services/MySqlService");
 //getFollowList Middleware
 const getFollowList = async(req,res)=>{
     try {
@@ -94,13 +95,7 @@ const searchFollow = async(req,res)=>{
     //get payload from body
     const maND = req.query.maND
     const maNS = req.query.maNS
-    let value = await User.getUserBy(["MAND"],[maND])
-    if(!value)
-        return res.json(ErrorServices("User code not found",-1,''))
-    value = await Artist.getArtistBY(["MANS"],[maNS])
-    if(!value)
-        return res.json(ErrorServices("Artist code not found",-1,''))
-    value = await UserFollow.searchFollow([getParamSearch(maND),getParamSearch(maNS)]);
+    const value = await UserFollow.searchFollow([getParamSearch(maND),getParamSearch(maNS)]);
     if(value)
         return res.json(ErrorServices("Retrive successfully ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
