@@ -1,5 +1,6 @@
 const GenreSong = require("../model/GenreSong");
-const {ErrorServices} = require("../services/ErrorService")
+const {ErrorServices} = require("../services/ErrorService");
+const { getParamSearch } = require("../services/MySqlService");
 // getGereSongs Middleware
 const getGereSongs = async(req,res)=>{
         try {
