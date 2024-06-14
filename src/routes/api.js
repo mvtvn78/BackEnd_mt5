@@ -86,7 +86,7 @@ const initApiRoutes = (app) => {
     router.post("/genre_add",addGenreSong)
     router.delete("/genre_remove",removeGenreSong)
     router.put("/genre_update",updateGenreSong)
-    router.get('/genre',searchGenre)
+    router.get('/genre_search',searchGenre)
 
     //URL : domain + /api/v1
     return app.use("/api/v1",router)

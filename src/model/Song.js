@@ -106,7 +106,7 @@ class Song
      static async searchDetailSongs(tenBH)
      {
         try {
-            let value = await CMD.excutebysql(`SELECT baihat.MABH ,baihat.Anh as "AnhBH",baihat.NoiDung ,baihat.TenBH,baihat.LoiBatHat,baihat.filenhac,nghesi.Anh as "AnhNS",nghesi.TenNS,nghesi.MANS FROM baihat INNER JOIN phathanh_bh ON baihat.MABH = phathanh_bh.MABH INNER JOIN nghesi ON nghesi.MANS = phathanh_bh.MANS WHERE baihat.TenBH LIKE '%${tenBH}%'`)
+            let value = await CMD.excutebysql(`SELECT baihat.MABH ,baihat.Anh as "AnhBH",baihat.NoiDung ,baihat.TenBH,baihat.LoiBatHat,baihat.filenhac,nghesi.Anh as "AnhNS",nghesi.TenNS,nghesi.MANS FROM baihat INNER JOIN phathanh_bh ON baihat.MABH = phathanh_bh.MABH INNER JOIN nghesi ON nghesi.MANS = phathanh_bh.MANS WHERE baihat.TenBH LIKE '%${tenBH}%' OR nghesi.TenNS LIKE '%${tenBH}%'`)
             if(value.length !=0)
                 return value
             return null

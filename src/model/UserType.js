@@ -80,6 +80,21 @@ class UserType
              return null
          }
      }
+     // 
+     static async getUserTypeByUserCode(id)
+     {
+        try {
+            const value = await CMD.excutebysql(`SELECT * FROM loaind INNER JOIN nguoidung on nguoidung.MaLoai = loaind.MaLoai WHERE nguoidung.MAND = '${id}'`)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getUserTypeByUserCode function has an error",err);
+            return null
+        }
+     }
     //#endregion
 }
 module.exports = UserType

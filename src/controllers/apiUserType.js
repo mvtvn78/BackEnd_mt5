@@ -3,6 +3,14 @@ const UserType = require("../model/UserType");
 // getUserTypes Middleware
 const getUserTypes = async (req,res)=>{
     try {
+        const id = req.query.id;
+        if(id)
+        {
+            const vl = await UserType.getUserTypeByUserCode(id)
+            if(!vl)
+                return res.json(ErrorServices("Cannot get usertype by id",-1,''))
+            return res.json(ErrorServices("Retrive UserType By Code Successfully",0,vl))
+        }
         const value = await UserType.getUserTypeList()
         if(!value)
         {
@@ -63,4 +71,5 @@ const searchUserTypes = async(req,res)=>{
         return res.json(ErrorServices("Retrive successfully ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
+
 module.exports = {getUserTypes,addUserType,updateUserType,removeUserType,searchUserTypes}
