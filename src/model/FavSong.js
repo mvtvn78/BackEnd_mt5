@@ -80,6 +80,24 @@ class FavSong
              return null
          }
      }
+     //
+     //
+    static async getFavListSongByCode (code)
+    {
+        try {
+            const sql = `SELECT baihat.MABH,baihat.TenBH,baihat.NoiDung,baihat.Anh as "AnhBH",baihat.LoiBatHat,baihat.filenhac,nghesi.MANS,nghesi.TenNS,nghesi.Anh as "AnhNS" FROM yeuthich INNER JOIN baihat ON baihat.MABH = yeuthich.MABH INNER JOIN phathanh_bh on phathanh_bh.MABH = baihat.MABH INNER JOIN nghesi ON phathanh_bh.MANS = nghesi.MANS WHERE yeuthich.MAND = '${code}' ORDER BY yeuthich.ThoiGian DESC`
+            console.log("CHECK >>> ",sql);
+            let value = await CMD.excutebysql(sql)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getFavListSongByCode function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = FavSong

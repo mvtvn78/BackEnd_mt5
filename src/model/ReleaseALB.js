@@ -95,6 +95,24 @@ class ReleaseALB
               return null
           }
       }
+      //
+      //
+    static async getReleaseAlbsByCode (code)
+    {
+        try {
+            const sql = `SELECT * FROM album INNER JOIN phathanh_alb ON phathanh_alb.MAALB = album.MAALB WHERE phathanh_alb.MANS ='${code}';`
+            console.log("CHECK >>> ",sql);
+            let value = await CMD.excutebysql(sql)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getReleaseAlbsByCode function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = ReleaseALB

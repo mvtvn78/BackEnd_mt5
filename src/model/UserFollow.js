@@ -81,6 +81,23 @@ class UserFollow
              return null
          }
      }
+     //
+    static async getDetailByCode (code)
+    {
+        try {
+            const sql = `SELECT nghesi.TenNS,nghesi.MANS,nghesi.Anh as "AnhNS",nghesi.MoTa,nguoidung.HoTen,nguoidung.MAND,nguoidung.Email FROM theodoi INNER JOIN nghesi ON nghesi.MANS = theodoi.MANS INNER JOIN nguoidung ON nguoidung.MAND = theodoi.MAND WHERE nguoidung.MAND ='${code}' ORDER BY theodoi.ThoiGian DESC`
+            console.log("CHECK >>> ",sql);
+            let value = await CMD.excutebysql(sql)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getDetailByCode's UserFoloow function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = UserFollow

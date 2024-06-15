@@ -130,6 +130,23 @@ class Song
             return null
         }
      }
+     //
+     static async getSongAlbumByCode (code)
+    {
+        try {
+            const sql = `SELECT baihat.MABH,baihat.MAALB,baihat.TenBH,baihat.Anh as "AnhBH",nghesi.TenNS,nghesi.MANS,baihat.NoiDung,baihat.filenhac,baihat.LoiBatHat,phathanh_bh.ThoiGian FROM baihat INNER JOIN phathanh_bh ON phathanh_bh.MABH = baihat.MABH INNER JOIN nghesi ON nghesi.MANS = phathanh_bh.MANS  WHERE baihat.MAALB = '${code}';`
+            console.log("CHECK >>> ",sql);
+            let value = await CMD.excutebysql(sql)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getSongAlbumByCode function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = Song

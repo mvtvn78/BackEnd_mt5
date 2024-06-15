@@ -100,4 +100,16 @@ const searchFollow = async(req,res)=>{
         return res.json(ErrorServices("Retrive successfully ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getFollowList,addFollow,removeFollow,searchFollow}
+// 
+const getDetailFollowByCode = async(req,res)=>{
+    //get payload from body
+    const maND = req.query.maND
+    if(maND)
+    {
+       const value = await UserFollow.getDetailByCode(maND)
+       if(value)
+       return res.json(ErrorServices("Retrive successfully ",0,value))
+    }
+  return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getFollowList,addFollow,removeFollow,searchFollow,getDetailFollowByCode}

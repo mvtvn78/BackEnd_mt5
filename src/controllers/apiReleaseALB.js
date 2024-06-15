@@ -84,4 +84,16 @@ const searchReleaseALBs = async(req,res)=>{
         return res.json(ErrorServices("Retrive has succesful ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getReleaseALBs,addReleaseALB,removeReleaseALB,searchReleaseALBs}
+// 
+const getReleaseALbs = async(req,res)=>{
+    //get payload from body
+    const ID = req.query.id
+    if(ID)
+    {
+       const value = await ReleaseALB.getReleaseAlbsByCode(ID);
+       if(value)
+       return res.json(ErrorServices("Retrive successfully ",0,value))
+    }
+  return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getReleaseALBs,getReleaseALbs,addReleaseALB,removeReleaseALB,searchReleaseALBs}

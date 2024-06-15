@@ -63,6 +63,7 @@ const removeFavSong = async(req,res)=>{
      //get payload from body
      const maND = req.body.maND
      const maBH = req.body.maBH
+     console.log({maND,maBH});
      let value = await User.getUserBy(["MAND"],[maND])
      if(!value)
          return res.json(ErrorServices("User code not found",-1,''))
@@ -86,4 +87,16 @@ const searchFav = async(req,res)=>{
         return res.json(ErrorServices("Retrive successfully ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getFavSongs,addFavSong,removeFavSong,searchFav}
+// 
+const getDetailsFavSong = async(req,res)=>{
+    //get payload from body
+    const maND = req.query.maND
+    if(maND)
+    {
+       const value = await FavSong.getFavListSongByCode(maND);
+       if(value)
+       return res.json(ErrorServices("Retrive successfully ",0,value))
+    }
+  return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getFavSongs,addFavSong,removeFavSong,searchFav,getDetailsFavSong}

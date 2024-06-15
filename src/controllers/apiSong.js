@@ -113,4 +113,12 @@ const IncreaseViewSong = async(req,res) =>{
         return res.json(ErrorServices("Inscrease successfully",0,''))
     return res.json(ErrorServices("Inscrease has failed",-1,''))
 }
-module.exports = {getSongs,updateSong,removeSong,addSong,searchSong,getDetailListSongs,IncreaseViewSong}
+//
+const getSongsByCode = async (req,res) => {
+    const albm = req.query.MAALB;
+    const value = await Song.getSongAlbumByCode(albm)
+    if(value)
+        return res.json(ErrorServices("Retrive successfully",0,value))
+    return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getSongs,updateSong,removeSong,addSong,searchSong,getDetailListSongs,IncreaseViewSong,getSongsByCode}
