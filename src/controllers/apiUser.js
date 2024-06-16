@@ -174,4 +174,12 @@ const searchUsers = async(req,res) => {
         return res.json(ErrorServices("Search successfully",0,value))
     return res.json(ErrorServices("Search has failed",-1,''))
 }
-module.exports = {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser,searchUsers}
+//GetTotal user
+const getTotalNumberUser = async(req,res) => {
+    
+    const value = await User.getTotalUsers()
+    if(value)
+        return res.json(ErrorServices("Retrieve successfully",0,value))
+    return res.json(ErrorServices("Retrieve has failed",-1,''))
+}
+module.exports = {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser,searchUsers,getTotalNumberUser}

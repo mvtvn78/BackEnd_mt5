@@ -147,6 +147,52 @@ class Song
             return null
         }
     }
+    //
+     static async getTotalSongs()
+     {
+         try {
+             let value = await CMD.excutebysql('SELECT COUNT(*) as "Total" FROM baihat')
+             if(value.length !=0)
+                 return value
+             return null
+         }
+         catch(err)
+         {
+             console.log("getTotalSongs function has an error",err);
+             return null
+         }
+     }
+     //
+     static async getTotalViewSongs()
+     {
+         try {
+             let value = await CMD.excutebysql('SELECT SUM(LuotXem) as "Total" FROM baihat')
+             if(value.length !=0)
+                 return value
+             return null
+         }
+         catch(err)
+         {
+             console.log("getTotalSongs function has an error",err);
+             return null
+         }
+     }
+     //
+     static async getTop5Songs ()
+     {
+        try {
+            let value = await CMD.excutebysql('SELECT * FROM baihat ORDER BY LuotXem DESC LIMIT 5')
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTop5Songs function has an error",err);
+            return null
+        }
+     }
+
     //#endregion
 }
 module.exports = Song

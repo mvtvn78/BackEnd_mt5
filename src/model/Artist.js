@@ -100,6 +100,21 @@ class Artist
             return null
         }
     }
+    //
+    static async getTotalArtists()
+    {
+        try {
+            let value = await CMD.excutebysql('SELECT COUNT(*)  as "Total" FROM nghesi')
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTotalArtists function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = Artist

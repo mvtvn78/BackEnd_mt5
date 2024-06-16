@@ -122,4 +122,28 @@ const getSongsByCode = async (req,res) => {
         return res.json(ErrorServices("Retrive successfully",0,value))
     return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getSongs,updateSong,removeSong,addSong,searchSong,getDetailListSongs,IncreaseViewSong,getSongsByCode}
+//GetTotal songs
+const getTotalNumberSongs = async(req,res) => {
+    
+    const value = await Song.getTotalSongs()
+    if(value)
+        return res.json(ErrorServices("Retrieve successfully",0,value))
+    return res.json(ErrorServices("Retrieve has failed",-1,''))
+}
+//GetTotal songs
+const getTotalNumberViews = async(req,res) => {
+    
+    const value = await Song.getTotalViewSongs()
+    if(value)
+        return res.json(ErrorServices("Retrieve successfully",0,value))
+    return res.json(ErrorServices("Retrieve has failed",-1,''))
+}
+//GetTotal songs
+const getTop5 = async(req,res) => {
+    
+    const value = await Song.getTop5Songs()
+    if(value)
+        return res.json(ErrorServices("Retrieve successfully",0,value))
+    return res.json(ErrorServices("Retrieve has failed",-1,''))
+}
+module.exports = {getTop5,getTotalNumberViews,getSongs,updateSong,removeSong,addSong,searchSong,getDetailListSongs,IncreaseViewSong,getSongsByCode,getTotalNumberSongs}

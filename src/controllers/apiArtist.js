@@ -87,4 +87,12 @@ const searchArtist = async(req,res) => {
         return res.json(ErrorServices("Search successfully",0,value))
     return res.json(ErrorServices("Search has failed",-1,''))
 }
-module.exports = {getArtists,addArtist,updateArtist,removeArtist,searchArtist}
+//GetTotal artist
+const getTotalNumberArtist = async(req,res) => {
+    
+    const value = await Artist.getTotalArtists()
+    if(value)
+        return res.json(ErrorServices("Retrieve successfully",0,value))
+    return res.json(ErrorServices("Retrieve has failed",-1,''))
+}
+module.exports = {getArtists,addArtist,updateArtist,removeArtist,searchArtist,getTotalNumberArtist}

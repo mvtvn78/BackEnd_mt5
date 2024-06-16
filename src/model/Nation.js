@@ -78,6 +78,36 @@ class Nation
             return null
         }
     }
+     //
+     static async getTotalArtistNations ()
+     {
+        try {
+            let value = await CMD.excutebysql('SELECT COUNT(nghesi.MANS) as "Total",quoctich.MaQT,quoctich.TenQT FROM nghesi INNER JOIN quoctich ON nghesi.MaQT = quoctich.MaQT GROUP BY quoctich.MaQT , quoctich.TenQT;')
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTotalArtistNations function has an error",err);
+            return null
+        }
+     }
+     //
+     static async getTotalUsersNations ()
+     {
+        try {
+            let value = await CMD.excutebysql('SELECT COUNT(nguoidung.MAND) as "Total",quoctich.MaQT,quoctich.TenQT FROM nguoidung INNER JOIN quoctich ON nguoidung.MaQT = quoctich.MaQT GROUP BY quoctich.MaQT , quoctich.TenQT;')
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTotalUsersNations function has an error",err);
+            return null
+        }
+     }
     //#endregion
 }
 module.exports = Nation

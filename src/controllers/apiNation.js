@@ -65,4 +65,18 @@ const searchNations = async(req,res)=>{
         return res.json(ErrorServices("Retrive successfully ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getNations,addNation,updateNation,removeNation,searchNations}
+//
+const getTotalByArtist = async(req,res)=>{
+    const  value = await  Nation.getTotalArtistNations()
+    if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+//
+const getTotalByUser = async(req,res)=>{
+    const  value = await  Nation.getTotalUsersNations()
+    if(value)
+        return res.json(ErrorServices("Retrive successfully ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getTotalByUser,getTotalByArtist,getNations,addNation,updateNation,removeNation,searchNations}

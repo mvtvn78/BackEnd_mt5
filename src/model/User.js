@@ -117,6 +117,20 @@ class User
             return null
         }
     }
+    static async getTotalUsers()
+    {
+        try {
+            let value = await CMD.excutebysql('SELECT COUNT(*) as "Total" FROM nguoidung')
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTotalUsers function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = User

@@ -1,16 +1,16 @@
 const express = require('express')
 const router = express.Router()
-const {getNations, addNation, updateNation,removeNation,searchNations} = require("../controllers/apiNation")
-const {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser,searchUsers} = require("../controllers/apiUser")
+const {getNations, addNation, updateNation,removeNation,searchNations, getTotalByUser, getTotalByArtist} = require("../controllers/apiNation")
+const {registerAPI,loginAPI,forgotPass,getUsers,UpdateUser,RemoveUser,searchUsers, getTotalNumberUser} = require("../controllers/apiUser")
 const {getFollowList,addFollow,removeFollow,searchFollow, getDetailFollowByCode} = require("../controllers/apiFollower")
 const { getFavSongs, addFavSong, removeFavSong ,searchFav, getDetailsFavSong} = require('../controllers/apiFav')
 const { getListendSong, addListendSong,searchListendSong ,ChangeTimeListendSong,getDeatilsListendListByCode} = require('../controllers/apiListendSong')
 const { getUserTypes, addUserType, updateUserType, removeUserType,searchUserTypes } = require('../controllers/apiUserType')
-const { getArtists, addArtist, removeArtist, updateArtist,searchArtist } = require('../controllers/apiArtist')
+const { getArtists, addArtist, removeArtist, updateArtist,searchArtist, getTotalNumberArtist } = require('../controllers/apiArtist')
 const { addReleaseALB, getReleaseALBs,searchReleaseALBs, removeReleaseALB, getReleaseALbs } = require('../controllers/apiReleaseALB')
 const { getReleaseSong, addReleaseSong, removeReleaseSong,searchReleaseSong } = require('../controllers/apiReleaseSong')
 const { updateAlbum, removeAlbum, addAlbum, getAlbums,searchAlbum } = require('../controllers/apiALb')
-const { getSongs, addSong, removeSong, updateSong,searchSong ,getDetailListSongs,IncreaseViewSong, getSongsByCode} = require('../controllers/apiSong')
+const { getSongs, addSong, removeSong, updateSong,searchSong ,getDetailListSongs,IncreaseViewSong, getSongsByCode, getTotalNumberSongs, getTotalNumberViews, getTop5} = require('../controllers/apiSong')
 const { getGereSongs,addGenreSong,removeGenreSong,updateGenreSong,searchGenre } = require('../controllers/apiGenreSong')
 const initApiRoutes = (app) => {
     //Follow API
@@ -37,6 +37,7 @@ const initApiRoutes = (app) => {
     router.post("/forgot",forgotPass)
     router.get("/users",getUsers)
     router.get("/user_search",searchUsers)
+    router.get("/users_total",getTotalNumberUser)
     router.put("/user_update",UpdateUser)
     router.delete("/user_remove",RemoveUser)
 
@@ -52,13 +53,15 @@ const initApiRoutes = (app) => {
     router.put("/nation_update",updateNation)
     router.delete("/nation_remove",removeNation)
     router.get("/nations_search",searchNations)
+    router.get("/nations_statis_user",getTotalByUser)
+    router.get("/nations_statis_artist",getTotalByArtist)
     //Artist API
     router.get("/artists",getArtists)
     router.post("/artists_add",addArtist)
     router.delete("/artists_remove",removeArtist)
     router.put("/artists_update",updateArtist)
     router.get("/artists_search",searchArtist)
-
+    router.get("/artists_total",getTotalNumberArtist)
     //ReleaseALB API
     router.get("/release_album",getReleaseALBs)
     router.post("/release_album_add",addReleaseALB)
@@ -84,6 +87,9 @@ const initApiRoutes = (app) => {
     router.get("/song_search",searchSong)
     router.get("/song_details",getDetailListSongs)
     router.get('/song_album_code',getSongsByCode)
+    router.get('/songs_total',getTotalNumberSongs)
+    router.get('/songs_statis_top5',getTop5)
+    router.get('/songs_total_view',getTotalNumberViews)
     router.put("/increase_view",IncreaseViewSong)
     //Genre Song API
     router.get('/genre',getGereSongs)
