@@ -48,7 +48,7 @@ class Song
     //Delete Method
     static async Delete(code) {
         try {
-            let value = await CMD.delete("baihat","MABH",code);
+            let value = await CMD.delete("baihat",["MABH"],[code]);
             return value.affectedRows ? true : false
         }
         catch(err)
