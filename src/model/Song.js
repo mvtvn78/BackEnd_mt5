@@ -20,11 +20,11 @@ class Song
     //#region Method
 
     //CreateNew Method
-    static async CreateNew(MAALB  ,MATL ,TenBH,TinhTrang,NoiDung,Anh,LuotXem,LoiBatHat) {
+    static async CreateNew(MAALB  ,MATL ,TenBH,TinhTrang,NoiDung,Anh,LuotXem,LoiBatHat,filenhac) {
         try {
             //intial unique code
             const MABH  = makeUniqueCode("BH",169);
-            let value = await CMD.insert("baihat",[MABH,MAALB,MATL,TenBH,TinhTrang,NoiDung,Anh,LuotXem,LoiBatHat]);
+            let value = await CMD.insert("baihat",[MABH,MAALB,MATL,TenBH,TinhTrang,NoiDung,Anh,LuotXem,LoiBatHat,filenhac]);
             return value.affectedRows ? true : false
         }
         catch(err)
@@ -36,7 +36,7 @@ class Song
     //Update Method
     static async Update(fields,values,code) {
         try {
-            let value = await CMD.update("baihat",[...fields],[...values],"MABH",code);
+            let value = await CMD.update("baihat",[...fields],[...values],["MABH"],[code]);
             return value.affectedRows ? true : false
         }
         catch(err)

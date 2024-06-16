@@ -49,7 +49,8 @@ const addSong = async(req,res)=>{
     const noiDung = req.body.noiDung
     const anh = req.body.anh
     const loibathat = req.body.loibathat
-    const value = await Song.CreateNew(maALB,maTL,tenBH,tinhTrang,noiDung,anh,0,loibathat)
+    const filenhac = req.body.filenhac
+    const value = await Song.CreateNew(maALB,maTL,tenBH,tinhTrang,noiDung,anh,0,loibathat,filenhac)
     if(value)
         return res.json(ErrorServices("Addition  succesful ",0,''))
    return res.json(ErrorServices("Addition has failed",-1,''))
