@@ -1,5 +1,6 @@
 const { ErrorServices } = require("../services/ErrorService");
 const UserType = require("../model/UserType");
+const { getParamSearch } = require("../services/MySqlService");
 // getUserTypes Middleware
 const getUserTypes = async (req,res)=>{
     try {
