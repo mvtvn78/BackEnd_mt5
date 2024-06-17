@@ -56,7 +56,7 @@ class Album
     static async getAlbumList()
     {
         try {
-            let value = await CMD.select("album");
+            let value = await CMD.select('album')
             if(value.length !=0)
                 return value
             return null
@@ -71,7 +71,7 @@ class Album
      static async getAlbumBy(code)
      {
          try {
-             let value = await CMD.selectOne("album",["MAALB"],[code]);
+             let value = await CMD.selectOne('album',['MAALB'],[code])
              if(value.length !=0)
                  return value
              return null

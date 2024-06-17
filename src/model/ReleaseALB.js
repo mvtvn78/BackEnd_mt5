@@ -100,7 +100,7 @@ class ReleaseALB
     static async getReleaseAlbsByCode (code)
     {
         try {
-            const sql = `SELECT * FROM album INNER JOIN phathanh_alb ON phathanh_alb.MAALB = album.MAALB WHERE phathanh_alb.MANS ='${code}';`
+            const sql = `SELECT * FROM album INNER JOIN phathanh_alb ON phathanh_alb.MAALB = album.MAALB WHERE phathanh_alb.MANS ='${code}'  AND album.TinhTrang =1;`
             console.log("CHECK >>> ",sql);
             let value = await CMD.excutebysql(sql)
             if(value.length !=0)
