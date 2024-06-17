@@ -112,4 +112,16 @@ const getDetailFollowByCode = async(req,res)=>{
     }
   return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getFollowList,addFollow,removeFollow,searchFollow,getDetailFollowByCode}
+//
+const getTotalFollowByArtist = async(req,res)=>{
+    //get payload from body
+    const maNS = req.query.maNS
+    if(maNS)
+    {
+       const value = await UserFollow.getTotalUserFollowByArtistCode(maNS)
+       if(value)
+       return res.json(ErrorServices("Retrive successfully ",0,value))
+    }
+  return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getFollowList,addFollow,removeFollow,searchFollow,getDetailFollowByCode,getTotalFollowByArtist}

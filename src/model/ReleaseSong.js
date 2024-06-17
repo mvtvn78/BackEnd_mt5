@@ -94,6 +94,21 @@ class ReleaseSong
               return null
           }
       }
+      // getTotalSongsByArtistCode
+      static async getTotalSongsByArtistCode (code)
+      {
+        try {
+            let value = await CMD.excutebysql(`SELECT COUNT(*) as 'Total' FROM phathanh_bh WHERE phathanh_bh.MANS = '${code}'`)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTotalSongsByArtistCode function has an error",err);
+            return null
+        }
+      }
     //#endregion
 }
 module.exports = ReleaseSong

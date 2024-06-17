@@ -83,4 +83,13 @@ const searchReleaseSong = async(req,res)=>{
         return res.json(ErrorServices("Retrive has succesful ",0,value))
    return res.json(ErrorServices("Retrive has failed",-1,''))
 }
-module.exports = {getReleaseSong,addReleaseSong,removeReleaseSong,searchReleaseSong}
+//
+const getTotalSongsByArist =  async(req,res)=>{
+    //get payload from body
+    const MANS = req.query.maNS
+    const value = await ReleaseSong.getTotalSongsByArtistCode(MANS)
+    if(value)
+        return res.json(ErrorServices("Retrive has succesful ",0,value))
+   return res.json(ErrorServices("Retrive has failed",-1,''))
+}
+module.exports = {getReleaseSong,addReleaseSong,removeReleaseSong,searchReleaseSong,getTotalSongsByArist}

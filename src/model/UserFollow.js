@@ -98,6 +98,23 @@ class UserFollow
             return null
         }
     }
+    //getTotalUserFollowByArtistCode 
+    static async getTotalUserFollowByArtistCode (code)
+    {
+        try {
+            const sql = `SELECT COUNT(*) AS 'Total' FROM theodoi WHERE theodoi.MANS ='${code}'`
+            //console.log("CHECK >>> ",sql);
+            let value = await CMD.excutebysql(sql)
+            if(value.length !=0)
+                return value
+            return null
+        }
+        catch(err)
+        {
+            console.log("getTotalUserFollowByArtistCode's UserFoloow function has an error",err);
+            return null
+        }
+    }
     //#endregion
 }
 module.exports = UserFollow
